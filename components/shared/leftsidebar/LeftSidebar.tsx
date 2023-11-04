@@ -34,7 +34,11 @@ const LeftSidebar = () => {
                 alt={link.label}
                 className={`${isActive ? "" : "invert-colors"}`}
               />
-              <p className={`${isActive ? "base-bold" : "base-medium"}`}>
+              <p
+                className={`${
+                  isActive ? "base-bold" : "base-medium"
+                } max-lg:hidden`}
+              >
                 {link.label}
               </p>
             </Link>
@@ -45,11 +49,27 @@ const LeftSidebar = () => {
         <div className="flex flex-col gap-3">
           <Link href="/sign-in">
             <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-              <span className="primary-text-gradient">Log In</span>
+              <Image
+                src="/assets/icons/account.svg"
+                alt="login "
+                height={20}
+                width={20}
+                className="invert-colors lg:hidden"
+              />
+              <span className="primary-text-gradient max-lg:hidden">
+                Log In
+              </span>
             </Button>
           </Link>
           <Link href="/sign-up">
             <Button className="small-medium light-border-2 btn-tertiary text-dark400_light900 inline-flex h-9 min-h-[41px] w-full items-center justify-center rounded-lg border bg-slate-900 px-4 py-3 text-sm font-medium shadow-none transition-colors hover:bg-slate-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 dark:focus-visible:ring-slate-300">
+              <Image
+                src="/assets/icons/sign-up.svg"
+                alt="sign-up"
+                height={20}
+                width={20}
+                className="invert-colors lg:hidden"
+              />
               <span className="max-lg:hidden">Sign Up</span>
             </Button>
           </Link>
