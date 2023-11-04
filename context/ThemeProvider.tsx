@@ -15,18 +15,25 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   // handler
   const handleThemeChange = () => {
-    if (mode === "dark") {
-      setMode("light")
-      document.documentElement.classList.add("light")
-    } else {
+    // check local storage or if theme does not exist in localstorage and the browser is not set to prefer dark mode
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark").matches)
+    ) {
       setMode("dark")
       document.documentElement.classList.add("dark")
+    } else {
+      setMode("light")
+      document.documentElement.classList.remove("dark")
     }
   }
   // we want to run this when the component loads
   useEffect(() => {
     handleThemeChange()
   }, [mode])
+
+  console.log(mode)
 
   // every Provider has to return something as to make values available to the children they are wrapped around
   return (
