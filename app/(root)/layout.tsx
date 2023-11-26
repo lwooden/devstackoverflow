@@ -1,6 +1,6 @@
-import LeftSidebar from "@/components/shared/leftsidebar/LeftSidebar"
+import LeftSidebar from "@/components/shared/LeftSidebar"
 import Navbar from "@/components/shared/navbar/Navbar"
-import RightSidebar from "@/components/shared/rightsidebar/RightSidebar"
+import RightSidebar from "@/components/shared/RightSidebar"
 import React from "react"
 
 // This Layout file defines the layout for every component under root
