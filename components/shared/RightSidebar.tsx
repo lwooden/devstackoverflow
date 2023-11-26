@@ -1,7 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import RenderTag from "../RenderTag"
+import RenderTag from "./RenderTag"
 
 const hotQuestions = [
   {
@@ -28,27 +28,27 @@ const hotQuestions = [
 
 const popularTags = [
   {
-    _id: 1,
+    _id: "1",
     name: "NextJS",
     totalQuestions: 18,
   },
   {
-    _id: 2,
+    _id: "2",
     name: "Test",
     totalQuestions: 18,
   },
   {
-    _id: 3,
+    _id: "3",
     name: "React",
     totalQuestions: 12,
   },
   {
-    _id: 4,
+    _id: "4",
     name: "CSS",
     totalQuestions: 8,
   },
   {
-    _id: 5,
+    _id: "5",
     name: "Next JS",
     totalQuestions: 7,
   },
