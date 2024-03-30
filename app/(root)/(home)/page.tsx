@@ -6,6 +6,7 @@ import Filter from "@/components/shared/Filter"
 import { HomePageFilters } from "@/constants/filters"
 import HomeFilters from "@/components/home/HomeFilters"
 import QuestionCard from "@/components/QuestionCard"
+import { getQuestions } from "@/lib/actions/question.actions"
 
 // const questionsOld = [
 //   {
@@ -134,7 +135,10 @@ const questions = [
   },
 ]
 
-export default function Home() {
+export default async function Home() {
+  const result = await getQuestions({})
+  // console.log(result)
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -161,7 +165,7 @@ export default function Home() {
       </div>
       <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.map((question) => (
+        {result.questions.map((question) => (
           <QuestionCard
             key={question._id}
             _id={question._id}
