@@ -1,0 +1,22 @@
+/* eslint-disable no-empty */
+// Action files for the Question domain object
+"use server"
+
+import User from "@/database/user.model"
+import { connectToDatabase } from "../mongoose"
+
+export async function getUserById(params: any) {
+  try {
+    connectToDatabase()
+    const { userId } = params
+
+    const user = await User.findOne({ clerkId: userId })
+    console.log(user)
+
+    return user
+  } catch (error) {
+    // Handle the error here
+    console.log(error)
+    throw error
+  }
+}
