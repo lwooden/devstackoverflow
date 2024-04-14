@@ -21,14 +21,14 @@ import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { createQuestion } from "@/lib/actions/question.actions"
 import { useRouter, usePathname } from "next/navigation"
-import router from "next/router"
-import path from "path"
+// import router from "next/router"
+// import path from "path"
 
 const type: any = "create"
 
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-})
+// const formSchema = z.object({
+//   username: z.string().min(2).max(50),
+// })
 
 interface Props {
   mongoUserId: string

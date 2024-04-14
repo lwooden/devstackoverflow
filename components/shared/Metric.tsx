@@ -1,4 +1,3 @@
-import { Link } from "lucide-react"
 import Image from "next/image"
 import React from "react"
 
@@ -21,6 +20,7 @@ const Metric = ({
   href,
   isAuthor,
 }: MetricProps) => {
+  // eslint-disable-next-line no-unused-vars
   const metricContent = (
     <>
       <Image
