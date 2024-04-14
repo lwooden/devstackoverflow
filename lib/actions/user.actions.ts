@@ -57,6 +57,7 @@ export async function updateUser(params: UpdateUserParams) {
   } catch (error) {
     console.log(error)
     throw error
+    // push
   }
 }
 
