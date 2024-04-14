@@ -17,7 +17,7 @@ export const connectToDatabase = async () => {
   console.log("=> using new database connection")
 
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect(process.env.MONGODB_URL ?? "", {
       dbName: "devstackoverflow",
     })
 
