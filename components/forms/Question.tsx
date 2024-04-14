@@ -161,7 +161,10 @@ const Question = ({ mongoUserId }: Props) => {
                 {/* TODO: Add a editor comoponent */}
                 <Editor
                   apiKey="qpaffb5jag2bgkqx1ysintau40wj5foz64f83kd6qvv06f9y"
-                  onInit={(evt, editor) => (editorRef.current = editor)}
+                  onInit={(evt, editor) => {
+                    // @ts-ignore
+                    editorRef.current = editor
+                  }}
                   onBlur={field.onBlur}
                   onEditorChange={(content) => field.onChange(content)}
                   initialValue=""
