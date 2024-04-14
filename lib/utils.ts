@@ -7,56 +7,50 @@ export function cn(...inputs: ClassValue[]) {
 
 export const getTimestamp = (createdAt: Date): string => {
   const now = new Date()
-  const timeDifferenceInSeconds = Math.floor(
-    (now.getTime() - createdAt.getTime()) / 1000
-  )
+  const timeDifference = now.getTime() - createdAt.getTime()
 
-  const intervals = {
-    year: 31536000,
-    month: 2592000,
-    week: 604800,
-    day: 86400,
-    hour: 3600,
-    minute: 60,
-    second: 1,
+  // Define time intervals in milliseconds
+  const minute = 60 * 1000
+  const hour = 60 * minute
+  const day = 24 * hour
+  const week = 7 * day
+  const month = 30 * day
+  const year = 365 * day
+
+  if (timeDifference < minute) {
+    const seconds = Math.floor(timeDifference / 1000)
+    return `${seconds} ${seconds === 1 ? "second" : "seconds"} ago`
+  } else if (timeDifference < hour) {
+    const minutes = Math.floor(timeDifference / minute)
+    return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`
+  } else if (timeDifference < day) {
+    const hours = Math.floor(timeDifference / hour)
+    return `${hours} ${hours === 1 ? "hour" : "hours"} ago`
+  } else if (timeDifference < week) {
+    const days = Math.floor(timeDifference / day)
+    return `${days} ${days === 1 ? "day" : "days"} ago`
+  } else if (timeDifference < month) {
+    const weeks = Math.floor(timeDifference / week)
+    return `${weeks} ${weeks === 1 ? "week" : "weeks"} ago`
+  } else if (timeDifference < year) {
+    const months = Math.floor(timeDifference / month)
+    return `${months} ${months === 1 ? "month" : "months"} ago`
+  } else {
+    const years = Math.floor(timeDifference / year)
+    return `${years} ${years === 1 ? "year" : "years"} ago`
   }
-
-  let intervalType
-  let intervalValue
-
-  for (const interval in intervals) {
-    intervalValue = Math.floor(timeDifferenceInSeconds / intervals[interval])
-    if (intervalValue >= 1) {
-      intervalType = interval
-      break
-    }
-  }
-
-  if (intervalValue > 1 || intervalValue === 0) {
-    intervalType += "s"
-  }
-
-  return `${intervalValue} ${intervalType} ago`
 }
 
-export const formatAndDivideNumber = () => {}
-
-export const formatBigNumber = (number: number): string => {
-  let result
-  let divisor
-
-  if (number >= 1e6) {
-    result = (number / 1e6).toFixed(2)
-    divisor = "M"
-  } else if (number >= 1e3) {
-    result = (number / 1e3).toFixed(0)
-    divisor = "K"
+export const formatAndDivideNumber = (num: number): string => {
+  if (num >= 1000000) {
+    const formattedNum = (num / 1000000).toFixed(1)
+    return `${formattedNum}M`
+  } else if (num >= 1000) {
+    const formattedNum = (num / 1000).toFixed(1)
+    return `${formattedNum}K`
   } else {
-    result = number
-    divisor = ""
+    return num.toString()
   }
-
-  return `${result}${divisor}`
 }
 
 // Example usage:

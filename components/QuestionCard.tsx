@@ -3,7 +3,7 @@ import React from "react"
 import RenderTag from "./shared/RenderTag"
 // import Image from "next/image"
 import Metric from "./shared/Metric"
-import { formatBigNumber, getTimestamp } from "@/lib/utils"
+import { formatAndDivideNumber, getTimestamp } from "@/lib/utils"
 
 // const questions = [
 //   {
@@ -96,7 +96,7 @@ const QuestionCard = ({
         <Metric
           imgUrl="/assets/icons/like.svg"
           alt="upvotes"
-          value={formatBigNumber(upvotes)}
+          value={formatAndDivideNumber(upvotes)}
           title=" Votes"
           textStyles="small-medium text-dark400_light800"
           isAuthor={false}
@@ -112,7 +112,7 @@ const QuestionCard = ({
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="views"
-          value={formatBigNumber(views)}
+          value={formatAndDivideNumber(views)}
           title=" Views"
           textStyles="small-medium text-dark400_light800"
           isAuthor={false}
