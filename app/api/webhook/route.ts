@@ -13,6 +13,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
+  console.log("Got a request!")
   const WEBHOOK_SECRET = process.env.NEXT_CLERK_WEBHOOK_SECRET
 
   if (!WEBHOOK_SECRET) {
