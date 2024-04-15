@@ -7,6 +7,10 @@ import { NextResponse } from "next/server"
 
 // This is a public api route that is responsibe for receiving Clerk webhook events
 
+export async function GET(req: Request) {
+  return NextResponse.json({ message: "OK" })
+}
+
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.NEXT_CLERK_WEBHOOK_SECRET
