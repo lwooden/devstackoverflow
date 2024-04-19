@@ -28,6 +28,19 @@ export async function getUserById(params: any) {
   }
 }
 
+export async function getAllUsers() {
+  try {
+    connectToDatabase()
+
+    const users = await User.find()
+
+    return { users }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
 // User actions that will handle webhook events that come from Clerk
 
 export async function createUser(userData: CreateUserParams) {
