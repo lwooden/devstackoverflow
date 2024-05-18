@@ -8,6 +8,7 @@ import { Inter, Space_Grotesk } from "next/font/google"
 import type { Metadata } from "next"
 
 import "./globals.css" // globals.css imports ../styles/theme.css which is where the class h1-bold is defined
+import "../styles/prism.css" // prism.css is where the code block styling is defined
 import { ThemeProvider } from "@/context/ThemeProvider"
 
 const inter = Inter({
