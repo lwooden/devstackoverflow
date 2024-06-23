@@ -7,6 +7,7 @@ import { connectToDatabase } from "../mongoose"
 import {
   CreateUserParams,
   DeleteUserParams,
+  ToggleSaveQuestionParams,
   UpdateUserParams,
 } from "./shared.types"
 import Question from "@/database/question.model"
@@ -100,6 +101,39 @@ export async function deleteUser(params: DeleteUserParams) {
     const deletedUser = await User.findByIdAndDelete(user._id)
 
     return deletedUser
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
+  try {
+    connectToDatabase()
+
+    const { userId, questionId, path } = params
+
+    let updateQuery = {}
+
+    const user = await User.findById(userId)
+
+    if (!user) {
+      throw new Error("User not found")
+    }
+
+    const isQuestionSaved = user.saved.includes(questionId)
+
+    if (isQuestionSaved) {
+      updateQuery = { $pull: { saved: questionId } }
+    } else {
+      updateQuery = { $addToSet: { saved: questionId } }
+    }
+
+    await User.findByIdAndUpdate(userId, updateQuery, {
+      new: true,
+    })
+
+    revalidatePath(path)
   } catch (error) {
     console.log(error)
     throw error
