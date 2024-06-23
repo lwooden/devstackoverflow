@@ -33,7 +33,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     handleThemeChange()
   }, [mode])
 
-  console.log(mode)
+  // console.log(mode)
 
   // every Provider has to return something as to make values available to the children they are wrapped around
   return (
