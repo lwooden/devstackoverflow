@@ -53,6 +53,12 @@ export const formatAndDivideNumber = (num: number): string => {
   }
 }
 
+export const getMonthYear = (date: Date): string => {
+  const month = date.toLocaleString("default", { month: "long" }) // Full month name
+  const year = date.getFullYear() // Year in four digits
+  return `Joined ${month} ${year}`
+}
+
 // Example usage:
 // const bigNumber = 1234567
 // const formattedNumber = formatBigNumber(bigNumber)
