@@ -11,9 +11,6 @@ import { Button } from "../ui/button"
 import Image from "next/image"
 import { createAnswer } from "@/lib/actions/answer.actions"
 import { usePathname } from "next/navigation"
-// import { Badge } from "lucide-react"
-// import { Input } from "../ui/input"
-// import Image from "next/image"
 
 interface Props {
   question: string
