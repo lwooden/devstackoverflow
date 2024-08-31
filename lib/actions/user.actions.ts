@@ -8,12 +8,14 @@ import {
   CreateUserParams,
   DeleteUserParams,
   GetUserByIdParams,
+  GetUserStatsParams,
   ToggleSaveQuestionParams,
   UpdateUserParams,
 } from "./shared.types"
 import Question from "@/database/question.model"
 import { revalidatePath } from "next/cache"
 import Answer from "@/database/answer.model"
+import Tag from "@/database/tag.model"
 
 export async function getUserById(params: any) {
   try {
@@ -59,6 +61,62 @@ export async function getUserInfo(params: GetUserByIdParams) {
     const totalAnswers = await Answer.countDocuments({ author: user._id })
 
     return { user, totalQuestions, totalAnswers }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+export async function getUserQuestions(params: GetUserStatsParams) {
+  try {
+    connectToDatabase()
+    const { userId, page = 1, pageSize = 10 } = params
+
+    const totalQuestions = await Question.countDocuments({ author: userId })
+
+    const questions = await Question.find({ author: userId })
+      .sort({ views: -1, upVotes: -1 })
+      .populate({
+        path: "tags",
+        model: Tag,
+        select: "_id name",
+      })
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id clerkId username picture",
+      })
+    // console.log("User Questions => ", questions)
+
+    return { totalQuestions, questions }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+export async function getUserAnswers(params: GetUserStatsParams) {
+  try {
+    connectToDatabase()
+    const { userId, page = 1, pageSize = 10 } = params
+
+    // const totalAnswers = await Answer.countDocuments({ author: userId })
+
+    const answers = await Answer.find({ author: userId })
+      .sort({ upVotes: -1 })
+      .populate({
+        path: "question",
+        model: Question,
+        select: "_id title upVotes tags",
+      })
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id clerkId username picture",
+      })
+    console.log("User Answers => ", answers)
+
+    return { answers }
   } catch (error) {
     console.log(error)
     throw error
