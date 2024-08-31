@@ -4,6 +4,7 @@ import RenderTag from "./shared/RenderTag"
 // import Image from "next/image"
 import Metric from "./shared/Metric"
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils"
+import { SignedIn } from "@clerk/nextjs"
 
 // const questions = [
 //   {
@@ -28,6 +29,7 @@ import { formatAndDivideNumber, getTimestamp } from "@/lib/utils"
 // ]
 
 interface QuestionProps {
+  clerkId?: string | null
   _id: string
   title: string
   tags: {
@@ -46,6 +48,7 @@ interface QuestionProps {
 }
 
 const QuestionCard = ({
+  clerkId,
   _id,
   title,
   tags,
@@ -69,6 +72,15 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
+        <SignedIn>
+          {clerkId === author._id && (
+            <Link href={`/question/edit/${_id}`}>
+              <button className="btn-secondary text-dark300_light900 min-h-[46px] min-w-[175px] px-4 py-3">
+                Edit Question
+              </button>
+            </Link>
+          )}
+        </SignedIn>
       </div>
       <div className="mt-3.5 flex flex-wrap gap-2">
         {/* Map over array of tags */}
